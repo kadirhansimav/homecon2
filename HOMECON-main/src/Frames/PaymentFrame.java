@@ -20,6 +20,7 @@ public class PaymentFrame extends javax.swing.JFrame {
         setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
         DefaultTableModel model = (DefaultTableModel)table.getModel();
          exp.tableUpdate(model);
+         deptLabel.setText(Integer.toString(exp.calculateExpense()));
     }
 
     /**

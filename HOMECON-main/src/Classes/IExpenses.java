@@ -10,7 +10,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public interface IExpenses {
     
-    void calculateExpense(int amount, double price); 
+    public int calculateExpense(  ); 
+    public int calculateSumExpense(  );
+    public int calculateSpecialExpenseSum( String expName );
     void addExpenseToDB (String userName, String type,String ExpenseName ,int amount, String date, int price );
     void tableUpdate (DefaultTableModel model);
     

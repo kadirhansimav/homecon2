@@ -1,31 +1,38 @@
 package Frames;
 
+import Classes.Expenses;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-
-
-
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Asus
- */
 public class MainMenuFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Intro
      */
+    final String food = "Food";
+    final String clean = "Cleaning";
+    final String gas = "Gas";
+    final String water = "Water";
+    final String internet = "Internet";
+    final String rent = "Rent";
+    final String other = "Others";
+    final String electric = "Electricity";
+    Expenses exp = new Expenses();
+
     public MainMenuFrame() {
         initComponents();
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
-        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+        foodPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(food)));
+        cleaningPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(clean)));
+        gasPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(gas)));
+        waterPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(water)));
+        internetPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(internet)));
+        //rentPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(food)));
+        othersPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(other)));
+        electricityPrice.setText(Integer.toString(exp.calculateSpecialExpenseSum(electric)));
+        totalPrice.setText(Integer.toString(exp.calculateSumExpense()));
     }
 
     /**
@@ -388,59 +395,59 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
     private void paymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentButtonActionPerformed
         //Opens PaymentFrame frame
-        
+
         PaymentFrame payments = new PaymentFrame();
-        
+
         payments.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_paymentButtonActionPerformed
 
     private void addNewExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewExpenseButtonActionPerformed
         //Opens Add New Expense frame
-        
+
         AddNewExpenseFrame newEx = new AddNewExpenseFrame();
-        
+
         newEx.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_addNewExpenseButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         // Opens admin password frame
-        
+
         //AddNewHousemate newMate = new AddNewHousemate();
         AdminPasswordFrame adminPass = new AdminPasswordFrame();
-        
+
         adminPass.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // Opens ProfileFrame frame
-        
+
         ProfileFrame profile = new ProfileFrame();
-        
+
         profile.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Goes back to Log in frame
-        
+
         LoginFrame login = new LoginFrame();
-        
+
         login.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void needsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_needsButtonActionPerformed
         // Opens NeedsFrame frame
-        
+
         NeedsFrame need = new NeedsFrame();
-        
+
         need.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_needsButtonActionPerformed
 
     /**

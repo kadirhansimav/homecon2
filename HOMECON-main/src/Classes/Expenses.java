@@ -1,6 +1,7 @@
  
 package Classes;
 
+import Frames.LoginFrame;
 import Frames.NeedsFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,11 +24,57 @@ public class Expenses implements IExpenses{
     ResultSet resultSet;
     Connection connection =null;
     dbHelper dbHelper1 = new dbHelper();
+    int sum;
+    int userSum ;
+    int sumAll;
+    int specialSum;
+     
   
          
-    @Override
-    public void calculateExpense(int amount, double price) {
-        
+    public int calculateExpense() {
+         try {
+             sum=0;
+            connection = dbHelper1.getConnection();
+            String sql ="select * from expenses where User != ?";
+            state = connection.prepareStatement(sql);
+            state.setString(1, LoginFrame.UserName);
+            resultSet = state.executeQuery();
+             
+            
+            while(resultSet.next()){
+                int price = resultSet.getInt("Price");
+                sum=sum+price;
+
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+         
+         
+        try {
+            userSum=0;
+            connection = dbHelper1.getConnection();
+            String sql ="select * from expenses where User = ?";
+            state = connection.prepareStatement(sql);
+            state.setString(1, LoginFrame.UserName);
+            resultSet = state.executeQuery();
+            
+            
+            while(resultSet.next()){
+                int price = resultSet.getInt("Price");
+                userSum=userSum+price;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Classes.Expenses.calculateExpense()");
+        }
+        System.out.println(userSum);
+         int resultSum = sum - userSum;
+         
+         return resultSum;
+         
     }
 
     public void addExpenseToDB(String userName, String type,String expenseName, int amount, String date, int price) {
@@ -83,10 +130,59 @@ public class Expenses implements IExpenses{
             }
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            
-        }
+        }  
     }
+
+    @Override
+    public int calculateSumExpense() {
+         
+        try {
+            sumAll=0;
+            connection = dbHelper1.getConnection();
+            statement = connection.createStatement();
+             
+            resultSet = statement.executeQuery("select * from expenses");
+            
+            while(resultSet.next()){
+                  
+                int price = resultSet.getInt("Price");
+                 sumAll = sumAll+price;
+                 
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+         return  sumAll;
+    }
+
+    @Override
+    public int calculateSpecialExpenseSum(String expName) {
+        try {
+            specialSum=0;
+            connection = dbHelper1.getConnection();
+            String sql1 ="select * from expenses where ExpenseType = ?";
+            state = connection.prepareStatement(sql1);
+            state.setString(1, expName);
+            resultSet = state.executeQuery();
+             
+            
+            while(resultSet.next()){
+                System.out.println("1");
+                int price = resultSet.getInt("Price");
+                 specialSum=specialSum+price;
+
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+        
+        return  specialSum;
+        
+    }
+
+     
 
     
     
